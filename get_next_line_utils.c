@@ -1,0 +1,132 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: drubio-m <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/04/23 11:50:19 by drubio-m          #+#    #+#             */
+/*   Updated: 2022/04/23 13:57:29 by drubio-m         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "get_next_line.h"
+
+
+char	*ft_strchr(const char *s, int c)
+{
+	int		i;
+	char	*cast_s;
+
+	i = 0;
+	cast_s = (char *) s;
+	while (s[i])
+	{
+		if (s[i] == (char)c)
+			return ((char *)s + i);
+		i++;
+	}
+	if (c == 0)
+		return (cast_s + i);
+	return (0);
+}
+
+char	*ft_strjoin(char const *s1, char const *s2)
+{
+	char	*str;
+	int		i;
+	int		j;
+
+	i = 0;
+	j = 0;
+	if (!s1 || !s2)
+		return (NULL);
+	str = malloc((ft_strlen(s1) + ft_strlen(s2) + 1) * sizeof (char));
+	if (str == (0))
+		return (0);
+	while (s1[i] != '\0')
+	{
+		str[i] = s1[i];
+		i++;
+	}
+	while (s2[j] != '\0')
+	{
+		str[i + j] = s2[j];
+		j++;
+	}
+	str[i + j] = '\0';
+	return (str);
+}
+
+size_t	ft_strlen(const char *s)
+{
+	int	i;
+
+	i = 0;
+	while (s[i] != '\0')
+		i++;
+	return (i);
+}
+
+char	*ft_print_line(char *str)
+{
+	int		i;
+	char	*ret;
+
+	i = 0;
+	if (!str)
+		return (NULL);
+	while (str[i] && str[i] != '\n')
+		i++;
+	ret = malloc(sizeof(char) * (i + 2));
+	if (!ret)
+		return (NULL);
+	i = 0;
+	while (str[i] && str[i] != '\n')
+	{
+		ret[i] = str[i];
+		i++;
+	}
+	if (str[i] == '\n')
+	{
+		ret[i] = str[i];
+		i++;
+	}
+	ret[i] = '\0';
+	return (ret);
+}
+
+char	*ft_new_static(char *aux)
+{
+	int		i;
+	int		j;
+	char	*ret;
+
+	i = 0;
+	while (aux[i] && aux[i] != '\n')
+		i++;
+	if (!aux)
+	{
+		free(aux);
+		return (NULL);
+	}
+	ret = malloc(sizeof(char) * (ft_strlen(aux) - i + 1));
+	if (!ret)
+		return (NULL);
+	j = 0;
+	i++;
+	while (aux[i] != '\0')
+		ret[j++] = aux[i++];
+	free(aux);
+	return (ret);
+}
+/*
+int main(void)
+{
+	char *str = "hola que tal\n peter";
+	char *sol;
+	sol = ft_print_line(str);
+	puts(sol);
+	return (0);
+}
+*/
