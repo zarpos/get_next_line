@@ -6,18 +6,19 @@
 /*   By: drubio-m <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/23 11:50:19 by drubio-m          #+#    #+#             */
-/*   Updated: 2022/04/23 13:57:29 by drubio-m         ###   ########.fr       */
+/*   Updated: 2022/04/24 21:14:03 by drubio-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-
 
 char	*ft_strchr(const char *s, int c)
 {
 	int		i;
 	char	*cast_s;
 
+	if (!s)
+		return(NULL);
 	i = 0;
 	cast_s = (char *) s;
 	while (s[i])
@@ -31,7 +32,7 @@ char	*ft_strchr(const char *s, int c)
 	return (0);
 }
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin(char *s1, char *s2)
 {
 	char	*str;
 	int		i;
@@ -39,6 +40,11 @@ char	*ft_strjoin(char const *s1, char const *s2)
 
 	i = 0;
 	j = 0;
+	if (!s1)
+	{
+		s1 = malloc(sizeof(char) * 1);
+		s1[0] = '\0';
+	}
 	if (!s1 || !s2)
 		return (NULL);
 	str = malloc((ft_strlen(s1) + ft_strlen(s2) + 1) * sizeof (char));
@@ -54,7 +60,8 @@ char	*ft_strjoin(char const *s1, char const *s2)
 		str[i + j] = s2[j];
 		j++;
 	}
-	str[i + j] = '\0';
+	str[ft_strlen(s1) + ft_strlen(s2)] = '\0';
+	free(s1);
 	return (str);
 }
 
@@ -63,6 +70,8 @@ size_t	ft_strlen(const char *s)
 	int	i;
 
 	i = 0;
+	if (!s)
+		return (0);
 	while (s[i] != '\0')
 		i++;
 	return (i);
@@ -105,7 +114,7 @@ char	*ft_new_static(char *aux)
 	i = 0;
 	while (aux[i] && aux[i] != '\n')
 		i++;
-	if (!aux)
+	if (!aux[i])
 	{
 		free(aux);
 		return (NULL);
@@ -113,10 +122,11 @@ char	*ft_new_static(char *aux)
 	ret = malloc(sizeof(char) * (ft_strlen(aux) - i + 1));
 	if (!ret)
 		return (NULL);
-	j = 0;
 	i++;
+	j = 0;
 	while (aux[i] != '\0')
 		ret[j++] = aux[i++];
+	ret[j] = '\0';
 	free(aux);
 	return (ret);
 }

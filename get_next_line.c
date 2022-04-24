@@ -6,7 +6,7 @@
 /*   By: drubio-m <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 14:05:45 by drubio-m          #+#    #+#             */
-/*   Updated: 2022/04/23 16:55:31 by drubio-m         ###   ########.fr       */
+/*   Updated: 2022/04/24 21:14:07 by drubio-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,12 @@ char	*ft_write_in_aux(int fd, char *aux)
 {
 	char	*buff;
 	int		bytes;
-	int		i;
 
-	buff = malloc(BUFFER_SIZE + 1 * sizeof(char));
+	buff = malloc(sizeof(char) * (BUFFER_SIZE + 1));
 	if (!buff)
 		return (NULL);
 	bytes = 1;
-	i = 0;
-	while (aux[i] != '\n' && bytes != 0)
+	while (!ft_strchr(aux, '\n') && bytes != 0)
 	{	
 		bytes = read(fd, buff, BUFFER_SIZE);
 		if (bytes == -1)
@@ -33,12 +31,10 @@ char	*ft_write_in_aux(int fd, char *aux)
 		}
 		buff[bytes] = '\0';
 		aux = ft_strjoin(aux, buff);
-		i++;
 	}
 	free(buff);
 	return (aux);
 }
-
 char	*get_next_line(int fd)
 {
 	char				*str;

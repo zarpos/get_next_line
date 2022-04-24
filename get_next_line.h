@@ -6,7 +6,7 @@
 /*   By: drubio-m <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 15:37:53 by drubio-m          #+#    #+#             */
-/*   Updated: 2022/04/20 17:47:05 by drubio-m         ###   ########.fr       */
+/*   Updated: 2022/04/24 20:37:45 by drubio-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 char	*get_next_line(int fd);
 char	*ft_write_in_aux(int fd, char *aux);
 char	*ft_strchr(const char *s, int c);
-char	*ft_strjoin(char const *s1, char const *s2);
+char	*ft_strjoin(char *s1, char *s2);
 size_t	ft_strlen(const char *s);
 char	*ft_print_line(char *str);
 char	*ft_new_static(char *aux);
