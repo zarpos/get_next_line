@@ -6,7 +6,7 @@
 /*   By: drubio-m <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 14:05:45 by drubio-m          #+#    #+#             */
-/*   Updated: 2022/05/03 15:26:43 by drubio-m         ###   ########.fr       */
+/*   Updated: 2022/05/03 19:12:16 by drubio-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ char	*ft_write_in_aux(int fd, char *aux)
 	free(buff);
 	return (aux);
 }
+
 char	*get_next_line(int fd)
 {
 	char				*str;
